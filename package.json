@@ -1,0 +1,22 @@
+{
+  "name": "mo-tui",
+  "version": "0.2.0",
+  "description": "Mole のコマンドを選んで実行する OpenTUI 製の簡易 TUI",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "mo-tui": "src/main.ts"
+  },
+  "scripts": {
+    "start": "bun src/main.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@opentui/core": "0.5.14"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,6 +1,6 @@
 # mo-tui
 
-Mole のコマンドを選んで実行する、Python 標準ライブラリだけの簡易 TUI。
+Mole のコマンドを選んで実行する、[OpenTUI](https://opentui.com/) 製の簡易 TUI。
 
 ```sh
 mo-tui
@@ -15,18 +15,33 @@ mo-tui
 ```sh
 mo-tui --list
 mo-tui --help
-python3 -m unittest discover -s .
 ```
 
-実装は `mo_tui.py`。Mole 1.56.1 のヘルプに合わせたコマンド一覧です（元の実装の対応バージョン表記）。
+コマンド一覧は Mole 1.56.1 のヘルプに合わせています。
+
+## 開発
+
+[Bun](https://bun.sh/) 1.3 以上が必要です（macOS arm64 で動作確認）。OpenTUI はネイティブライブラリを FFI で読み込むため、Node.js では動かしません。
+
+```sh
+bun install
+bun test
+bun run typecheck
+bun src/main.ts
+```
+
+- `src/actions.ts`: コマンド一覧、`--dry-run` の付与、確認要否の判定
+- `src/app.ts`: 画面とキー操作（`@opentui/core` の命令的 API）
+- `src/run.ts`: レンダラーを一時停止し、Mole へ端末を渡して実行
+- `src/main.ts`: 引数解析と起動
 
 ## 起動リンクの設定
 
-Mole の `mo` コマンドが PATH 上に必要です。リポジトリのルートで以下を実行すると、このコピーを起動できます。既存のリンクを置き換えるため、切り替える場合だけ実行してください。
+Mole の `mo` コマンドと Bun が PATH 上に必要です。リポジトリのルートで `bun install` の後に以下を実行すると、このコピーを起動できます。既存のリンクを置き換えるため、切り替える場合だけ実行してください。
 
 ```sh
 mkdir -p ~/.local/bin
-ln -sfn "$PWD/mo_tui.py" ~/.local/bin/mo-tui
+ln -sfn "$PWD/src/main.ts" ~/.local/bin/mo-tui
 ```
 
 `~/.local/bin` を PATH に含めてください。このプロジェクトの作成時には既存の起動リンクは変更していません。
@@ -36,3 +51,5 @@ ln -sfn "$PWD/mo_tui.py" ~/.local/bin/mo-tui
 このツールは、[Tw93](https://github.com/tw93) 氏と[コントリビューターの皆さん](https://github.com/tw93/Mole/graphs/contributors)が開発する [Mole](https://github.com/tw93/Mole) を呼び出すランチャーです。Mac のメンテナンス機能を実装し、オープンソースとして公開・保守してくださっている皆さんに感謝します。
 
 クリーンアップや最適化などの機能は Mole が提供するもので、mo-tui 自体が実装しているものではありません。mo-tui は Mole の公式プロジェクトではありません。
+
+画面描画には [OpenTUI](https://github.com/anomalyco/opentui)（MIT License）を使用しています。
