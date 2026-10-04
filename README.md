@@ -30,3 +30,9 @@ ln -sfn "$PWD/mo_tui.py" ~/.local/bin/mo-tui
 ```
 
 `~/.local/bin` を PATH に含めてください。このプロジェクトの作成時には既存の起動リンクは変更していません。
+
+## 謝辞
+
+このツールは、[Tw93](https://github.com/tw93) 氏と[コントリビューターの皆さん](https://github.com/tw93/Mole/graphs/contributors)が開発する [Mole](https://github.com/tw93/Mole) を呼び出すランチャーです。Mac のメンテナンス機能を実装し、オープンソースとして公開・保守してくださっている皆さんに感謝します。
+
+クリーンアップや最適化などの機能は Mole が提供するもので、mo-tui 自体が実装しているものではありません。mo-tui は Mole の公式プロジェクトではありません。
